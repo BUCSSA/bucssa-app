@@ -10,63 +10,70 @@ var React = require('React');
 class Card extends React.Component {
   render() {
     return (
-      <View style={styles.cardContainer}>
+      <View style={styles.card_container}>
         <Image
           source={{uri: 'http://placehold.it/350x150'}}
           style={styles.thumbnail}
         />
-        <View style={styles.cardInnerContainerRight}>
+        <View style={styles.card_inner_container}>
           <Text style={styles.title}>{this.props.name}</Text>
-          <Text style={styles.content}>{this.props.address}</Text>
-          <Text style={styles.content}>{this.props.contact}</Text>
+          <View style={styles.card_inner_container_right}>
+            <Text style={styles.content}>{this.props.contact}</Text>
+            <Text style={styles.content}>{this.props.address}</Text>
+          </View>
         </View>
       </View>
     )
   }
 }
 
-const imageDimension = Dimensions.get('window').width / 4;
+const scale = Dimensions.get('window').width;
 
 var styles = StyleSheet.create({
-  container: {
+  card_container: {
     flex: 1,
-  },
-  cardContainer: {
-    flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
     marginTop: 10,
+    width: scale * 0.95,
     borderRadius: 2,
     borderColor: '#FFFFFF',
     borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.4)',
+    shadowColor: 'rgba(0, 0, 0,0.4)',
     shadowOpacity: 0.8,
-    shadowRadius: 1,
+    shadowRadius: 2,
     shadowOffset: {
-      height: 0,
+      height: 1,
       width: 3,
     },
   },
-  cardInnerContainerRight: {
+  card_inner_container: {
     flex: 1,
     marginLeft: 10,
+    flexDirection: 'row',
+  },
+  card_inner_container_right: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'column',
   },
   title: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: 'bold',
     marginTop: 10,
     textAlign: 'left',
   },
   content: {
-    marginTop: 10,
-    textAlign: 'left',
+    fontSize: 10,
+    textAlign: 'right',
+    color: 'rgba(135, 135, 135, 0.75)',
   },
   thumbnail: {
-    height: imageDimension,
-    width: imageDimension,
-    borderRadius: 1,
+    height: scale / 4,
+    width: scale * 0.945,
+    borderRadius: 2,
   },
 });
 
