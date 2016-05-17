@@ -2,9 +2,12 @@
 
 'use strict'
 
-var React = require('React');
-
+var Text = require('Text');
+var View = require('View');
+var StyleSheet = require('StyleSheet');
+var ListView = require('ListView');
 var Card = require('./components/Card');
+var React = require('React');
 
 var MOCKED_DATA = [
   {name: 'lorum0', address: 'somewhere interesting', contact: '888-888-8888'},
@@ -20,7 +23,63 @@ var MOCKED_DATA = [
 ];
 
 function setup(): React.Component {
+  class restaurant_listing extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        dataSource: new ListView.DataSource({
+          rowHasChanged: (row1, row2) => row1 !== row2,
+        }),
+      }
+    }
 
+    componentDidMount() {
+      this.fetchData();
+    }
+
+    fetchData() {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(MOCKED_DATA),
+      });
+    }
+
+    render() {
+      return(
+        <View style = {styles.main_container}>
+          <View style = {styles.header_container}>
+            <Text style = {styles.header_text}>餐厅优惠</Text>
+          </View>
+          <ListView
+            style = {styles.listView}
+            dataSource = {this.state.dataSource}
+            renderRow = {(rowData) => <Card name={rowData.name} address={rowData.address} contact={rowData.contact}/>}
+          />
+        </View>
+      );
+    }
+  }
+  return restaurant_listing;
 }
+
+var styles = StyleSheet.create({
+  main_container: {
+    flex: 1,
+  },
+  header_container: {
+    paddingTop: 10,
+    backgroundColor: '#ed2f41',
+    flexDirection: 'row',
+  },
+  header_text: {
+    textAlign: 'center',
+    fontSize: 17,
+    color: '#FFFFFF',
+    marginVertical: 15,
+    flex: 1,
+  },
+  listView: {
+    flex: 1,
+  },
+});
 
 module.exports = setup;

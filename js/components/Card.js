@@ -1,35 +1,33 @@
 /* @flow */
 
+var Dimensions = require('Dimensions');
+var StyleSheet = require('StyleSheet');
+var Image = require('Image');
+var View = require('View');
+var Text = require('Text');
 var React = require('React');
-var {
-  Dimensions,
-  StyleSheet,
-  Image,
-  View,
-  Text,
-} = require('React');
-
 
 class Card extends React.Component {
   render() {
-    var imageDimension = Dimensions.get('window').width/3;
     return (
       <View style={styles.cardContainer}>
         <Image
           source={{uri: 'http://placehold.it/350x150'}}
-          style={{'width':imageDimension, 'height':imageDimension}}
+          style={styles.thumbnail}
         />
         <View style={styles.cardInnerContainerRight}>
-          <Text style={styles.title}>Name</Text>
-          <Text style={styles.content}>700 Commonwealth Ave. Boston 02215</Text>
-          <Text style={styles.content}>888-8888888</Text>
+          <Text style={styles.title}>{this.props.name}</Text>
+          <Text style={styles.content}>{this.props.address}</Text>
+          <Text style={styles.content}>{this.props.contact}</Text>
         </View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const imageDimension = Dimensions.get('window').width / 4;
+
+var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -39,13 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 2,
-    borderColor: '#ffffff',
+    borderColor: '#FFFFFF',
     borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.23)',
+    shadowColor: 'rgba(0, 0, 0, 0.4)',
     shadowOpacity: 0.8,
-    shadowRadius: 5,
+    shadowRadius: 1,
     shadowOffset: {
       height: 0,
       width: 3,
@@ -64,6 +62,11 @@ const styles = StyleSheet.create({
   content: {
     marginTop: 10,
     textAlign: 'left',
+  },
+  thumbnail: {
+    height: imageDimension,
+    width: imageDimension,
+    borderRadius: 1,
   },
 });
 
