@@ -11,7 +11,7 @@ var React = require('React');
 var styles = require('./styles');
 
 /* views */
-var restaurantPromos = require('./views/restuarantPromos');
+var restaurantPromos = require('./views/restaurantPromos');
 
 function setup(): React.Component {
   return restaurantPromos;

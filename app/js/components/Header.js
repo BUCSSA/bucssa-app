@@ -1,11 +1,22 @@
+
 'use strict'
 
+var React = require('React');
+var View = require('View');
+var Text = require('Text');
 var StyleSheet = require('StyleSheet');
 
+class Header extends React.Component {
+  render() {
+    return (
+      <View style = {styles.header_container}>
+        <Text style = {styles.header_text}>{this.props.title}</Text>
+      </View>
+    );
+  }
+}
+
 var styles = StyleSheet.create({
-  main_container: {
-    flex: 1,
-  },
   header_container: {
     paddingTop: 10,
     backgroundColor: '#ed2f41',
@@ -18,11 +29,6 @@ var styles = StyleSheet.create({
     marginVertical: 15,
     flex: 1,
   },
-  list_view_container: {
-    flex: 1,
-    backgroundColor:'rgba(237,47,65,0.025)',
-    alignItems: 'center',
-  },
 });
 
-module.exports = styles;
+module.exports = Header;
