@@ -8,13 +8,12 @@ var StyleSheet = require('StyleSheet');
 var ListView = require('ListView');
 var Card = require('./components/Card');
 var React = require('React');
-var styles = require('./styles');
 
 /* views */
-var restaurantPromos = require('./views/restaurantPromos');
+var RestaurantPromos = require('./views/restaurantPromos');
 
 function setup(): React.Component {
-  return restaurantPromos;
+  return RestaurantPromos;
 }
 
 module.exports = setup;

@@ -18,22 +18,12 @@ class Card extends React.Component {
     }
   }
 
-  togglePressed() {
-    this.setState({
-      pressed: !this.state.pressed,
-    });
-  }
-
-  pressed() {
-    console.log("Pressed!");
-    this.togglePressed();
-    console.log(this.state.pressed);
-  }
-
-  render() {
+  renderRestaurantInfoCard() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.pressed.bind(this)} activeOpacity = {0.6}>
+        <TouchableHighlight
+          onPress={this.props.onPress}
+          activeOpacity = {0.8}>
           <View style={styles.card_container}>
             <Image
               source={{uri: this.props.thumbnail}}
@@ -49,7 +39,13 @@ class Card extends React.Component {
           </View>
         </TouchableHighlight>
       </View>
-    )
+    );
+  }
+
+  render() {
+    if (this.props.type === 'restaurantPromos') {
+      return this.renderRestaurantInfoCard();
+    }
   }
 }
 

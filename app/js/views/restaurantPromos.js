@@ -4,10 +4,11 @@ var Text = require('Text');
 var View = require('View');
 var StyleSheet = require('StyleSheet');
 var ListView = require('ListView');
+var Navigator = require('Navigator');
 var Card = require('../components/Card');
 var Header = require('../components/Header');
 var React = require('React');
-var styles = require('../styles');
+var PromoDetails = require('./promoDetails');
 
 var MOCKED_DATA = [
   {name: 'lorum0', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
@@ -22,8 +23,7 @@ var MOCKED_DATA = [
   {name: 'lorum9', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
 ];
 
-
-class restaurantPromos extends React.Component {
+class PromoListing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,11 +46,22 @@ class restaurantPromos extends React.Component {
   render() {
     return(
       <View style = {styles.main_container}>
-        <Header title='餐厅优惠'/>
+        <Header title='餐厅优惠' type = 'promoListing'/>
         <View style = {styles.list_view_container}>
           <ListView
             dataSource = {this.state.dataSource}
-            renderRow = {(rowData) => <Card name={rowData.name} address={rowData.address} contact={rowData.contact} thumbnail={rowData.thumbnail}/>}
+            renderRow = {(rowData) =>
+              <Card
+                name={rowData.name}
+                address={rowData.address}
+                contact={rowData.contact}
+                thumbnail={rowData.thumbnail}
+                type='restaurantPromos'
+                onPress={()=>{
+                  console.log("pressed %s!", rowData.name);
+                  this.props.navigator.push({id: 'promoDetails', name: rowData.name});
+                }}
+              />}
             showsVerticalScrollIndicator = {false}
           />
         </View>
@@ -59,4 +70,40 @@ class restaurantPromos extends React.Component {
   }
 }
 
-module.exports = restaurantPromos;
+class RestaurantPromos extends React.Component {
+  renderScene(route, nav) {
+    console.log(route.id);
+    if (route.id === 'promoDetails') {
+      return <PromoDetails name={route.name} navigator={nav}/>
+    }
+    return <PromoListing navigator={nav}/>
+  }
+
+  render() {
+    return (
+      <Navigator
+        initialRoute = {{id: "PromoListing"}}
+        renderScene = {this.renderScene}
+        configureScene = {(route) => {
+          if (route.sceneConfig) {
+            return route.sceneConfig;
+          }
+          return Navigator.SceneConfigs.HorizontalSwipeJump;
+        }}
+      />
+    );
+  }
+}
+
+var styles = StyleSheet.create({
+  main_container: {
+    flex: 1,
+  },
+  list_view_container: {
+    flex: 1,
+    backgroundColor:'rgba(219, 221, 215, 0.125)',
+    alignItems: 'center',
+  },
+});
+
+module.exports = RestaurantPromos;
