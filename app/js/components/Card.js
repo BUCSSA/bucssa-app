@@ -27,11 +27,12 @@ class Card extends React.Component {
           <View style={styles.card_container}>
             <Image
               source={{uri: this.props.thumbnail}}
-              style={styles.thumbnail}
-            />
+              style={styles.thumbnail}>
+            </Image>
             <View style={styles.card_inner_container}>
               <Text style={styles.title}>{this.props.name}</Text>
               <View style={styles.card_inner_container_right}>
+                <Text style={styles.content}>100% off</Text>
                 <Text style={styles.content}>{this.props.contact}</Text>
                 <Text style={styles.content}>{this.props.address}</Text>
               </View>
@@ -87,7 +88,7 @@ var styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 17,
     textAlign: 'left',
   },
   content: {
@@ -96,7 +97,7 @@ var styles = StyleSheet.create({
     color: 'rgba(135, 135, 135, 0.75)',
   },
   thumbnail: {
-    height: scale / 4,
+    height: scale * 0.25,
     borderRadius: 1,
   },
 });

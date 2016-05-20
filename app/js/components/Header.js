@@ -16,27 +16,27 @@ class Header extends React.Component {
   render() {
     if (this.props.type === 'promoDetails') {
       return (
-        <View style = {styles.header_container}>
-          <View style = {styles.header_left_container}>
+        <View style={[styles.header_container,{backgroundColor: '#000000', marginBottom: 30,}]}>
+          <View style={styles.header_left_container}>
             <Icon
-              name = 'keyboard-arrow-left'
-              size = {20}
-              style = {styles.close_button}
-              onPress = {this.onPress.bind(this)}
+              name='keyboard-arrow-left'
+              size={20}
+              style={styles.close_button}
+              onPress={this.onPress.bind(this)}
             />
           </View>
-          <Text style = {styles.header_text}>{this.props.title}</Text>
-          <View style = {styles.header_right_container}>
+          <Text style={styles.header_text}>{this.props.title}</Text>
+          <View style={styles.header_right_container}>
           </View>
         </View>
       );
     }
     return (
-      <View style = {styles.header_container}>
-        <View style = {styles.header_left_container}>
+      <View style={styles.header_container}>
+        <View style={styles.header_left_container}>
         </View>
-        <Text style = {styles.header_text}>{this.props.title}</Text>
-        <View style = {styles.header_right_container}>
+        <Text style={styles.header_text}>{this.props.title}</Text>
+        <View style={styles.header_right_container}>
         </View>
       </View>
     );

@@ -10,17 +10,19 @@ var Header = require('../components/Header');
 var React = require('React');
 var PromoDetails = require('./promoDetails');
 
+const imageServer: String = 'https://bucssa-app.s3.amazonaws.com/restaurant-image/';
+
 var MOCKED_DATA = [
-  {name: 'lorum0', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum1', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum2', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum3', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum4', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum5', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum6', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum7', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum8', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
-  {name: 'lorum9', address: 'somewhere interesting', contact: '888-888-8888', thumbnail:'https://bucssa-app.s3.amazonaws.com/restaurant-image/19_ConceptArt_subwayexit-1080_195960.jpg'},
+  {name: 'lorum0', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum1', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum2', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum3', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum4', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum5', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum6', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum7', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum8', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
+  {name: 'lorum9', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
 ];
 
 class PromoListing extends React.Component {
@@ -45,12 +47,12 @@ class PromoListing extends React.Component {
 
   render() {
     return(
-      <View style = {styles.main_container}>
-        <Header title='餐厅优惠' type = 'promoListing'/>
-        <View style = {styles.list_view_container}>
+      <View style={styles.main_container}>
+        <Header title='餐厅优惠' type='promoListing'/>
+        <View style={styles.list_view_container}>
           <ListView
-            dataSource = {this.state.dataSource}
-            renderRow = {(rowData) =>
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) =>
               <Card
                 name={rowData.name}
                 address={rowData.address}
@@ -59,10 +61,10 @@ class PromoListing extends React.Component {
                 type='restaurantPromos'
                 onPress={()=>{
                   console.log("pressed %s!", rowData.name);
-                  this.props.navigator.push({id: 'promoDetails', name: rowData.name});
+                  this.props.navigator.push({id: 'promoDetails', name: rowData.name, images: rowData.images});
                 }}
               />}
-            showsVerticalScrollIndicator = {false}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </View>
@@ -74,7 +76,7 @@ class RestaurantPromos extends React.Component {
   renderScene(route, nav) {
     console.log(route.id);
     if (route.id === 'promoDetails') {
-      return <PromoDetails name={route.name} navigator={nav}/>
+      return <PromoDetails name={route.name} navigator={nav} images={route.images}/>
     }
     return <PromoListing navigator={nav}/>
   }
@@ -82,13 +84,13 @@ class RestaurantPromos extends React.Component {
   render() {
     return (
       <Navigator
-        initialRoute = {{id: "PromoListing"}}
-        renderScene = {this.renderScene}
-        configureScene = {(route) => {
+        initialRoute={{id: "PromoListing"}}
+        renderScene={this.renderScene}
+        configureScene={(route) => {
           if (route.sceneConfig) {
             return route.sceneConfig;
           }
-          return Navigator.SceneConfigs.HorizontalSwipeJump;
+          return Navigator.SceneConfigs.PushFromRight;
         }}
       />
     );
