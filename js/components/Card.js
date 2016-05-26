@@ -2,19 +2,38 @@
 
 'use strict'
 
-var Dimensions = require('Dimensions');
-var StyleSheet = require('StyleSheet');
-var Image = require('Image');
-var View = require('View');
-var Text = require('Text');
-var React = require('React');
-var TouchableHighlight = require('TouchableHighlight');
+var React = require('react');
+var ReactNative = require('react-native');
+
+var {
+  Dimensions,
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  TouchableHighlight
+} = ReactNative;
+
+type State = {
+  pressed: boolean
+}
+
+type Props = {
+  name: string,
+  address: string,
+  contact: string,
+  thumbnail: string,
+  type: string,
+  onPress: Function
+}
 
 class Card extends React.Component {
-  constructor(props) {
+  state: State;
+
+  constructor(props: Props) {
     super(props);
     this.state = {
-      pressed: false,
+      pressed: false
     }
   }
 
@@ -55,7 +74,7 @@ const scale = Dimensions.get('window').width;
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 10
   },
   card_container: {
     flex: 1,
@@ -63,7 +82,7 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
-    width: scale * 0.97,
+    width: scale,
     borderRadius: 2,
     borderColor: '#FFFFFF',
     borderWidth: 1,
@@ -72,34 +91,34 @@ var styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: {
       height: 1,
-      width: 3,
-    },
+      width: 3
+    }
   },
   card_inner_container: {
     flex: 1,
     marginLeft: 10,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   card_inner_container_right: {
     flex: 1,
     padding: 10,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   title: {
     fontSize: 17,
     fontWeight: 'bold',
     marginTop: 17,
-    textAlign: 'left',
+    textAlign: 'left'
   },
   content: {
     fontSize: 10,
     textAlign: 'right',
-    color: 'rgba(135, 135, 135, 0.75)',
+    color: 'rgba(135, 135, 135, 0.75)'
   },
   thumbnail: {
     height: scale * 0.25,
-    borderRadius: 1,
-  },
+    borderRadius: 1
+  }
 });
 
 module.exports = Card;

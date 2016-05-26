@@ -1,12 +1,17 @@
 /* @flow */
 'use strict'
 
-var View = require('View');
-var Text = require('Text');
-var Image = require('Image');
-var StyleSheet = require('StyleSheet');
-var Dimensions = require('Dimensions');
-var React = require('React');
+var React = require('react');
+var ReactNative = require('react-native');
+
+var {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions
+} = ReactNative;
+
 var Header = require('../components/Header');
 var Card = require('../components/Card');
 var Swiper = require('react-native-swiper');

@@ -1,11 +1,16 @@
 
 'use strict'
 
-var React = require('React');
-var Dimensions = require('Dimensions');
-var View = require('View');
-var Text = require('Text');
-var StyleSheet = require('StyleSheet');
+var React = require('react');
+var ReactNative = require('react-native');
+
+var {
+  Dimensions,
+  View,
+  Text,
+  StyleSheet
+} = ReactNative;
+
 var Icon = require('react-native-vector-icons/MaterialIcons');
 
 class Header extends React.Component {
@@ -50,25 +55,25 @@ var styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 15,
     backgroundColor: '#ed2f41',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   header_left_container: {
     width: scale/3,
-    alignItems: 'flex-start',
+    alignItems: 'flex-start'
   },
   close_button:{
     marginLeft: 10,
-    color: '#FFFFFF',
+    color: '#FFFFFF'
   },
   header_right_container: {
-    width: scale/3,
+    width: scale/3
   },
   header_text: {
     width: scale/3,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
+    color: '#FFFFFF'
+  }
 });
 
 module.exports = Header;

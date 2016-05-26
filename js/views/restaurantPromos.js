@@ -1,16 +1,25 @@
+/* @flow */
 'use strict'
 
-var Text = require('Text');
-var View = require('View');
-var StyleSheet = require('StyleSheet');
-var ListView = require('ListView');
-var Navigator = require('Navigator');
+var React = require('react');
+var ReactNative = require('react-native');
 var Card = require('../components/Card');
 var Header = require('../components/Header');
-var React = require('React');
 var PromoDetails = require('./promoDetails');
 
-const imageServer: String = 'https://bucssa-app.s3.amazonaws.com/restaurant-image/';
+var {
+    Text,
+    View,
+    StyleSheet,
+    ListView,
+    Navigator
+} = ReactNative;
+
+type State = {
+  dataSource: ListView.DataSource
+}
+
+const imageServer = 'https://bucssa-app.s3.amazonaws.com/restaurant-image/';
 
 var MOCKED_DATA = [
   {name: 'lorum0', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
@@ -26,12 +35,14 @@ var MOCKED_DATA = [
 ];
 
 class PromoListing extends React.Component {
+  state: State;
+
   constructor(props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
+        rowHasChanged: (row1, row2) => row1 !== row2
+      })
     }
   }
 
@@ -73,7 +84,7 @@ class PromoListing extends React.Component {
 }
 
 class RestaurantPromos extends React.Component {
-  renderScene(route, nav) {
+  renderScene(route: Object, nav: Object): React.Element {
     console.log(route.id);
     if (route.id === 'promoDetails') {
       return <PromoDetails name={route.name} navigator={nav} images={route.images}/>
@@ -104,8 +115,8 @@ var styles = StyleSheet.create({
   list_view_container: {
     flex: 1,
     backgroundColor:'rgba(219, 221, 215, 0.125)',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 });
 
 module.exports = RestaurantPromos;
