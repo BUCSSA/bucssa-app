@@ -3,9 +3,6 @@
 
 var React = require('react');
 var ReactNative = require('react-native');
-var Card = require('../components/Card');
-var Header = require('../components/Header');
-var PromoDetails = require('./promoDetails');
 
 var {
     Text,
@@ -15,9 +12,9 @@ var {
     Navigator
 } = ReactNative;
 
-type State = {
-  dataSource: ListView.DataSource
-}
+var Card = require('../components/Card');
+var Header = require('../components/Header');
+var PromoDetails = require('./promoDetails');
 
 const imageServer = 'https://bucssa-app.s3.amazonaws.com/restaurant-image/';
 
@@ -34,10 +31,19 @@ var MOCKED_DATA = [
   {name: 'lorum9', address: 'somewhere interesting', contact: '888-888-8888', thumbnail: imageServer + 'test.jpg', images: [imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg',imageServer + 'test.jpg']},
 ];
 
+type State = {
+  dataSource: ListView.DataSource
+}
+
+type Props = {
+	nav: Object
+}
+
 class PromoListing extends React.Component {
   state: State;
+	props: Props;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
@@ -70,9 +76,10 @@ class PromoListing extends React.Component {
                 contact={rowData.contact}
                 thumbnail={rowData.thumbnail}
                 type='restaurantPromos'
+								nav={this.props.nav}
                 onPress={()=>{
                   console.log("pressed %s!", rowData.name);
-                  this.props.navigator.push({id: 'promoDetails', name: rowData.name, images: rowData.images});
+                  this.props.nav.push({id: 'promoDetails', name: rowData.name, images: rowData.images});
                 }}
               />}
             showsVerticalScrollIndicator={false}
@@ -83,40 +90,15 @@ class PromoListing extends React.Component {
   }
 }
 
-class RestaurantPromos extends React.Component {
-  renderScene(route: Object, nav: Object): React.Element {
-    console.log(route.id);
-    if (route.id === 'promoDetails') {
-      return <PromoDetails name={route.name} navigator={nav} images={route.images}/>
-    }
-    return <PromoListing navigator={nav}/>
-  }
-
-  render() {
-    return (
-      <Navigator
-        initialRoute={{id: "PromoListing"}}
-        renderScene={this.renderScene}
-        configureScene={(route) => {
-          if (route.sceneConfig) {
-            return route.sceneConfig;
-          }
-          return Navigator.SceneConfigs.PushFromRight;
-        }}
-      />
-    );
-  }
-}
-
 var styles = StyleSheet.create({
   main_container: {
     flex: 1,
   },
   list_view_container: {
-    flex: 1,
+		flex: 1,
     backgroundColor:'rgba(219, 221, 215, 0.125)',
     alignItems: 'center'
   }
 });
 
-module.exports = RestaurantPromos;
+module.exports = PromoListing;

@@ -13,45 +13,39 @@ var {
   Navigator,
 } = ReactNative;
 
-/* components */
-var TabBar = require('./components/TabBar');
-
 /* views */
 var RestaurantPromos = require('./views/restaurantPromos');
+var PromoDetails = require('./views/promoDetails');
 var RecentEvents = require('./views/recentEvents');
 
 const ROUTE_STACK = [
   {id: 'recentEvents'},
-  {id: 'restaurantPromos'}
+  {id: 'promoListing'}
 ];
 
 function setup() {
   class Root extends React.Component {
-    renderScene(route: Object, navigator: Object): React.Element {
-      console.log(route.id);
-      switch (route.id) {
-        case 'recentEvents':
-          return <RecentEvents />
-        default:
-          return <RestaurantPromos />
-      }
-    }
-
     render() {
-      return(
-        <Navigator
-          initialRouteStack={ROUTE_STACK}
-          renderScene={this.renderScene}
-          navigationBar={
-            <TabBar
-              initTabIndex={0}
-              routeStack={ROUTE_STACK}
-              onTabIndex={(index) => {
-                Navigator.jumpTo(ROUTE_STACK[index]);
-              }}
-            />}
-        />
-      );
+			return (
+				<Navigator
+					initialRouteStack={ROUTE_STACK}
+					style={{flex:1}}
+					renderScene={(route, navigator) => {
+						switch (route.id) {
+							case 'promoDetails':
+								return <PromoDetails
+									nav={navigator}
+									name={route.name}
+									images={route.images}
+								/>;
+							case 'recentEvents':
+								return <RecentEvents />;
+							default:
+								return <RestaurantPromos nav={navigator}/>;
+						}
+					}}
+				/>
+			);
     }
   }
   return Root;

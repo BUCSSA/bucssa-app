@@ -24,6 +24,7 @@ type Props = {
   contact: string,
   thumbnail: string,
   type: string,
+	nav: Object,
   onPress: Function
 }
 

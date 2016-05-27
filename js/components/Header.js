@@ -38,10 +38,14 @@ class Header extends React.Component {
     }
     return (
       <View style={styles.header_container}>
-        <View style={styles.header_left_container}>
+        <View style={styles.header_button_container}>
+					<Text style={styles.header_text}>餐厅优惠</Text>
         </View>
-        <Text style={styles.header_text}>{this.props.title}</Text>
-        <View style={styles.header_right_container}>
+        <View style={styles.header_button_container}>
+					<Text style={styles.header_text_unselected}>近期活动</Text>
+        </View>
+        <View style={styles.header_button_container}>
+					<Text style={styles.header_text_unselected}>个人设置</Text>
         </View>
       </View>
     );
@@ -57,22 +61,25 @@ var styles = StyleSheet.create({
     backgroundColor: '#ed2f41',
     flexDirection: 'row'
   },
-  header_left_container: {
-    width: scale/3,
-    alignItems: 'flex-start'
+  header_button_container: {
+		flex: 0.3,
+    alignItems: 'center'
   },
   close_button:{
     marginLeft: 10,
     color: '#FFFFFF'
   },
-  header_right_container: {
-    width: scale/3
-  },
   header_text: {
-    width: scale/3,
+		flex: 0.3,
     textAlign: 'center',
     fontWeight: 'bold',
     color: '#FFFFFF'
+  },
+  header_text_unselected: {
+		flex: 0.3,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#C70039'
   }
 });
 
