@@ -18,9 +18,14 @@ var RestaurantPromos = require('./views/restaurantPromos');
 var PromoDetails = require('./views/promoDetails');
 var RecentEvents = require('./views/recentEvents');
 
+/* components */
+var Header = require('./components/Header');
+
 const ROUTE_STACK = [
-  {id: 'recentEvents'},
-  {id: 'promoListing'}
+  {id: 'promoListing'},
+	{id: 'recentEvents'},
+	{id: 'digitalCard'},
+	{id: 'dummy'} /* this route will get replace when click on a card in promoListing*/
 ];
 
 function setup() {
@@ -29,7 +34,7 @@ function setup() {
 			return (
 				<Navigator
 					initialRouteStack={ROUTE_STACK}
-					style={{flex:1}}
+					initialRoute={ROUTE_STACK[0]}
 					renderScene={(route, navigator) => {
 						switch (route.id) {
 							case 'promoDetails':
@@ -37,12 +42,19 @@ function setup() {
 									nav={navigator}
 									name={route.name}
 									images={route.images}
+									routeStack={ROUTE_STACK}
 								/>;
 							case 'recentEvents':
-								return <RecentEvents />;
+								return <RecentEvents nav={navigator} routeStack={ROUTE_STACK}/>;
 							default:
-								return <RestaurantPromos nav={navigator}/>;
+								return <RestaurantPromos nav={navigator} routeStack={ROUTE_STACK}/>;
 						}
+					}}
+					configureScene={(route) =>{
+						if (route.id === 'promoDetails') {
+							return Navigator.SceneConfigs.PushFromRight;
+						}
+						return Navigator.SceneConfigs.FadeAndroid
 					}}
 				/>
 			);

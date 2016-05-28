@@ -22,7 +22,8 @@ class PromoDetails extends React.Component {
       <View style={styles.main_container}>
         <Header
           title={this.props.name}
-          navigator={this.props.nav}
+          nav={this.props.nav}
+					routeStack={this.props.routeStack}
           type='promoDetails'
         />
         <Swiper style={styles.wrapper} height={Dimensions.get('window').height * 0.7}

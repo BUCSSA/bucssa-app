@@ -36,7 +36,8 @@ type State = {
 }
 
 type Props = {
-	nav: Object
+	nav: Object,
+	routeStack: Array<Object>
 }
 
 class PromoListing extends React.Component {
@@ -65,7 +66,12 @@ class PromoListing extends React.Component {
   render() {
     return(
       <View style={styles.main_container}>
-        <Header title='餐厅优惠' type='promoListing'/>
+				<Header
+					selected='餐馆优惠'
+					type='promoListing'
+					nav={this.props.nav}
+					routeStack={this.props.routeStack}
+				/>
         <View style={styles.list_view_container}>
           <ListView
             dataSource={this.state.dataSource}
@@ -79,7 +85,9 @@ class PromoListing extends React.Component {
 								nav={this.props.nav}
                 onPress={()=>{
                   console.log("pressed %s!", rowData.name);
-                  this.props.nav.push({id: 'promoDetails', name: rowData.name, images: rowData.images});
+                  this.props.nav.replaceAtIndex({id: 'promoDetails', name: rowData.name, images: rowData.images},3);
+									console.log(this.props.nav.getCurrentRoutes());
+									this.props.nav.jumpTo(this.props.nav.getCurrentRoutes()[3]);
                 }}
               />}
             showsVerticalScrollIndicator={false}
