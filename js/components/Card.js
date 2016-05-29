@@ -4,6 +4,7 @@
 
 var React = require('react');
 var ReactNative = require('react-native');
+var MK = require('react-native-material-kit');
 
 var {
   Dimensions,
@@ -13,6 +14,11 @@ var {
   Text,
   TouchableHighlight
 } = ReactNative;
+
+var {
+	MKButton,
+	MKColor
+} = MK;
 
 type State = {
   pressed: boolean
@@ -40,42 +46,75 @@ class Card extends React.Component {
 
   renderRestaurantInfoCard() {
     return (
-      <View style={styles.container}>
-        <TouchableHighlight
-          onPress={this.props.onPress}
-          activeOpacity = {0.8}>
-          <View style={styles.card_container}>
-            <Image
-              source={{uri: this.props.thumbnail}}
-              style={styles.thumbnail}>
-            </Image>
-            <View style={styles.card_inner_container}>
-              <Text style={styles.title}>{this.props.name}</Text>
-              <View style={styles.card_inner_container_right}>
-                <Text style={styles.content}>100% off</Text>
-                <Text style={styles.content}>{this.props.contact}</Text>
-                <Text style={styles.content}>{this.props.address}</Text>
-              </View>
-            </View>
-          </View>
-        </TouchableHighlight>
-      </View>
+			<TouchableHighlight
+				onPress={this.props.onPress}
+				activeOpacity = {0.8}
+				style={styles.container}
+			>
+				<View style={styles.card_container}>
+					<Image
+						source={{uri: this.props.thumbnail}}
+						style={styles.thumbnail}>
+					</Image>
+					<View style={styles.card_inner_container}>
+						<Text style={styles.title}>{this.props.name}</Text>
+						<View style={styles.card_inner_container_right}>
+							<Text style={styles.content}>100% off</Text>
+							<Text style={styles.content}>{this.props.contact}</Text>
+							<Text style={styles.content}>{this.props.address}</Text>
+						</View>
+					</View>
+				</View>
+			</TouchableHighlight>
     );
   }
+
+	renderEventPosterCard() {
+		var Button = MKButton.coloredButton()
+		.withText('查看详情')
+		.withTextStyle({
+			color: '#FFF',
+			fontWeight: 'bold'
+		})
+		.withBackgroundColor('#ed2f41')
+		.build();
+
+		return (
+			<TouchableHighlight
+				onPress={this.props.onPress}
+				activeOpacity = {0.8}
+				style={styles.container}
+			>
+				<View style={styles.card_container}>
+					<Image
+						source={{uri: this.props.poster}}
+						style={styles.poster}>
+					</Image>
+					<View style={styles.card_inner_container}>
+						<Text style={styles.title}>{this.props.name}</Text>
+						<View style={styles.card_inner_container_right}>
+							<Button />
+						</View>
+					</View>
+				</View>
+			</TouchableHighlight>
+		);
+	}
 
   render() {
     if (this.props.type === 'restaurantPromos') {
       return this.renderRestaurantInfoCard();
-    }
+		}
+		return this.renderEventPosterCard();
   }
 }
 
 const scale = Dimensions.get('window').width;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 10
+	container: {
+		marginTop: 10,
+		borderRadius: 2
   },
   card_container: {
     flex: 1,
@@ -83,17 +122,18 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#FFFFFF',
-    width: scale,
+    width: scale * 0.97,
     borderRadius: 2,
-    borderColor: '#FFFFFF',
-    borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0,0.6)',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 3
-    }
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+		borderWidth: 1,
+    borderRightWidth: 1.5,
+		shadowColor: 'rgba(0, 0, 0, 0.3)',
+		shadowOpacity: 0.8,
+		shadowRadius: 1,
+		shadowOffset: {
+			height: 1,
+			width: 2
+		}
   },
   card_inner_container: {
     flex: 1,
@@ -103,12 +143,14 @@ var styles = StyleSheet.create({
   card_inner_container_right: {
     flex: 1,
     padding: 10,
-    flexDirection: 'column'
+		flexDirection: 'column',
+		alignItems:'flex-end'
   },
   title: {
     fontSize: 17,
     fontWeight: 'bold',
-    marginTop: 17,
+		alignSelf: 'center',
+    //marginTop: 17,
     textAlign: 'left'
   },
   content: {
@@ -117,9 +159,13 @@ var styles = StyleSheet.create({
     color: 'rgba(135, 135, 135, 0.75)'
   },
   thumbnail: {
-    height: scale * 0.25,
-    borderRadius: 1
-  }
+    height: scale * 0.4,
+		borderRadius: 1
+	},
+	poster: {
+		height: scale * 0.4,
+		borderRadius: 1
+	}
 });
 
 module.exports = Card;

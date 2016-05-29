@@ -54,7 +54,7 @@ function setup() {
 						if (route.id === 'promoDetails') {
 							return Navigator.SceneConfigs.PushFromRight;
 						}
-						return Navigator.SceneConfigs.FadeAndroid
+						return Navigator.SceneConfigs.FadeAndroid;
 					}}
 				/>
 			);

@@ -18,6 +18,12 @@ var Swiper = require('react-native-swiper');
 
 class PromoDetails extends React.Component {
   render() {
+		var rows = [];
+		this.props.images.forEach(image => {
+			rows.push(<View style={styles.slide} title={<Text numberOfLines={1} style={{color: '#FFFFFF'}}>Description</Text>}>
+			<Image style={styles.image} source={{uri: image}} />
+		</View>)
+		});
     return (
       <View style={styles.main_container}>
         <Header
@@ -33,18 +39,7 @@ class PromoDetails extends React.Component {
           paginationStyle={{
             bottom: -23, left: null, right: 10,
           }} loop={true}>
-          <View style={styles.slide} title={<Text numberOfLines={1} style={{color: '#FFFFFF'}}>Description 1</Text>}>
-            <Image style={styles.image} source={{uri: this.props.images[0]}} />
-          </View>
-          <View style={styles.slide} title={<Text numberOfLines={1} style={{color: '#FFFFFF'}}>Description 2</Text>}>
-            <Image style={styles.image} source={{uri: this.props.images[1]}} />
-          </View>
-          <View style={styles.slide} title={<Text numberOfLines={1} style={{color: '#FFFFFF'}}>Description 3</Text>}>
-            <Image style={styles.image} source={{uri: this.props.images[2]}} />
-          </View>
-          <View style={styles.slide} title={<Text numberOfLines={1} style={{color: '#FFFFFF'}}>Description 4</Text>}>
-            <Image style={styles.image} source={{uri: this.props.images[3]}} />
-          </View>
+					{rows}
         </Swiper>
       </View>
     );

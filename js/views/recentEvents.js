@@ -6,10 +6,12 @@ var ReactNative = require('react-native');
 var {
   View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	ScrollView
 } = ReactNative;
 
 var Header = require('../components/Header');
+var Card = require('../components/Card');
 
 class recentEvents extends React.Component {
   render() {
@@ -20,7 +22,17 @@ class recentEvents extends React.Component {
 					routeStack={this.props.routeStack}
 					selected='近期活动'
 				/>
-        <Text> This is the event page </Text>
+				<ScrollView
+					style={{flex:1}}
+				>
+					<View style={{alignItems: 'center'}}>
+						<Card
+							type='event'
+							poster='https://bucssa-app.s3.amazonaws.com/restaurant-image/test.jpg'
+							name='event'
+						/>
+					</View>
+				</ScrollView>
       </View>
     );
   }
