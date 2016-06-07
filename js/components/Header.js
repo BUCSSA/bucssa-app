@@ -85,7 +85,7 @@ class Header extends React.Component {
 							console.log(this.props.nav.getCurrentRoutes());
 							this.props.nav.jumpTo(this.props.routeStack[0]);
 						}}
-					/>
+     />
 				</View>
         <View style={styles.header_button_container}>
 					<Button
@@ -96,7 +96,7 @@ class Header extends React.Component {
 							console.log(this.props.nav.getCurrentRoutes());
 							this.props.nav.jumpTo(this.props.routeStack[1]);
 						}}
-					/>
+     />
         </View>
         <View style={styles.header_button_container}>
 					<Button
@@ -105,7 +105,7 @@ class Header extends React.Component {
 						onPress={()=>{
 							console.log(this.props.selected);
 						}}
-					/>
+     />
         </View>
       </View>
     );

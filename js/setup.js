@@ -3,64 +3,44 @@
 'use strict'
 
 var React = require('react');
-var ReactNative = require('react-native');
 
-var {
+import {
   Text,
   View,
   StyleSheet,
   ListView,
   Navigator,
-} = ReactNative;
+} from 'react-native';
+
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 /* views */
-var RestaurantPromos = require('./views/restaurantPromos');
-var PromoDetails = require('./views/promoDetails');
-var RecentEvents = require('./views/recentEvents');
+import {
+  RestaurantPromos
+} from './views/restaurantPromos';
 
-/* components */
-var Header = require('./components/Header');
+import {
+  RecentEvents
+} from './views/recentEvents.js';
 
-const ROUTE_STACK = [
-  {id: 'promoListing'},
-	{id: 'recentEvents'},
-	{id: 'digitalCard'},
-	{id: 'dummy'} /* this route will get replace when click on a card in promoListing*/
-];
 
 function setup() {
   class Root extends React.Component {
     render() {
 			return (
-				<Navigator
-					initialRouteStack={ROUTE_STACK}
-					initialRoute={ROUTE_STACK[0]}
-					renderScene={(route, navigator) => {
-						switch (route.id) {
-							case 'promoDetails':
-								return <PromoDetails
-									nav={navigator}
-									name={route.name}
-									images={route.images}
-									routeStack={ROUTE_STACK}
-								/>;
-							case 'recentEvents':
-								return <RecentEvents nav={navigator} routeStack={ROUTE_STACK}/>;
-							default:
-								return <RestaurantPromos nav={navigator} routeStack={ROUTE_STACK}/>;
-						}
-					}}
-					configureScene={(route) =>{
-						if (route.id === 'promoDetails') {
-							return Navigator.SceneConfigs.PushFromRight;
-						}
-						return Navigator.SceneConfigs.FadeAndroid;
-					}}
-				/>
+			<ScrollableTabView
+        style={{
+          paddingTop: 10,
+        }}
+      >
+        <RestaurantPromos tabLabel='餐厅优惠' />
+        <RecentEvents tabLabel='近期活动' />
+      </ScrollableTabView>
 			);
     }
   }
   return Root;
+
 }
 
 module.exports = setup;

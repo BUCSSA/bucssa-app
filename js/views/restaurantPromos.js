@@ -66,12 +66,6 @@ class PromoListing extends React.Component {
   render() {
     return(
       <View style={styles.main_container}>
-				<Header
-					selected='餐馆优惠'
-					type='promoListing'
-					nav={this.props.nav}
-					routeStack={this.props.routeStack}
-				/>
         <View style={styles.list_view_container}>
           <ListView
             dataSource={this.state.dataSource}
@@ -109,4 +103,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = PromoListing;
+module.exports.RestaurantPromos = PromoListing;

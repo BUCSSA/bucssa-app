@@ -1,14 +1,13 @@
 /* @flow */
 
 var React = require('react');
-var ReactNative = require('react-native');
 
-var {
+import {
   View,
 	Text,
 	StyleSheet,
 	ScrollView
-} = ReactNative;
+} from 'react-native';
 
 var Header = require('../components/Header');
 var Card = require('../components/Card');
@@ -17,11 +16,6 @@ class recentEvents extends React.Component {
   render() {
     return (
       <View style={styles.main_container}>
-				<Header
-					nav={this.props.nav}
-					routeStack={this.props.routeStack}
-					selected='近期活动'
-				/>
 				<ScrollView
 					style={{flex:1}}
 				>
@@ -44,4 +38,4 @@ var styles = StyleSheet.create({
 	}
 });
 
-module.exports = recentEvents;
+module.exports.RecentEvents = recentEvents;

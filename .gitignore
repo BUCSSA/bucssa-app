@@ -39,7 +39,10 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-#Vim
+# Vim
 tags
 *.swp
+
+# Config Files
 .eslintrc
+.vscode
